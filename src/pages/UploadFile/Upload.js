@@ -2,7 +2,7 @@ import React,{ useContext, useRef, useState,useEffect}from 'react'
 import axios from 'axios'
 import fileImage from '../../assets/Group 132.svg'
 import { UserContext } from '../../Auth/Authenticate'
-
+import loadingImage from '../../assets/Loading.svg'
 
 function Upload() {
   
@@ -72,7 +72,7 @@ function Upload() {
  
 return(
  <>
- {loading?(<div className='w-fit font-bold mx-auto text-7xl mt-[15rem] text-blue-600 '>Loading...</div>):(allowed?(
+ {loading?(<img className='mx-auto mt-[15rem] animate-spin' src={loadingImage} alt="" />):(allowed?(
    <>
    <div className='m-2' >
    {selected?isHide?(
@@ -169,7 +169,8 @@ return(
       
      
      ):(
-       <div onDragOver={handleDrag} onDrop={handleDrop} className='w-[60rem] flex flex-col mx-auto my-[5rem]  py-[10rem] ring bg-blue-700 ring-blue-600 text-white   ring-offset-2 '>
+      <>
+      <div onDragOver={handleDrag} onDrop={handleDrop} className='w-[60rem] flex flex-col mx-auto my-[5rem]  py-[10rem] ring bg-blue-700 ring-blue-600 text-white   ring-offset-2 '>
          <h1 className='w-fit mx-auto text-3xl '>Drag and Drop File to Upload</h1>
  
          <input hidden ref={inputRef} type='file' name='file' onChange={(e)=>{
@@ -182,6 +183,10 @@ return(
          }}/>
          <button className=' ring-offset-2 w-fit mx-auto mt-4  text-2xl font-semibold  bg-white text-blue-700 py-2 px-[6rem]' onClick={()=>inputRef.current.click()}>Upload File</button>
        </div>
+       
+      
+      </>
+       
       
      )
    }

@@ -2,9 +2,12 @@
 import axios from "axios"
 import { UserContext } from "../../Auth/Authenticate"
 import { useContext } from "react"
-function ViewEachFile({loading,selectFile,fileName}) {
+import closeButton from '../../assets/close2.svg'
+import loadingImage from '../../assets/Loading.svg'
+function ViewEachFile({selectFile,fileName,handleChange}) {
+ 
   const {username}=useContext(UserContext)
-    if(selectFile==='' && loading)return (<div className="w-fit ml-[12rem] mt-[16rem] text-3xl bg-slate-700 cursor-not-allowed p-4 text-white">Loading...</div>)
+  
     if(selectFile){
       const download=async()=>{
         await axios.post('/updateUser/review',{username,fileName})
@@ -23,21 +26,24 @@ function ViewEachFile({loading,selectFile,fileName}) {
       }
         
         return(<>
-        <div className='flex flex-col w-fit m-auto '>
-            <h1 className='text-xl font-semibold bg-black text-white py-2 px-6  '>{fileName}</h1>
-            <div className=' text-justify select-none bg-slate-700 text-white p-2 w-[40rem] h-[28rem] overflow-y-scroll '>
+        <div className='w-[70rem]  rounded-md flex flex-col'>
+          <div className="text-lg text-white py-[1rem] rounded-md bg-slate-900">
+            <h1 className='ml-2'>File Name:<span className="text-slate-300 italic ml-2"> {fileName}</span></h1>
+            
+          </div>
+            <div className='mt-4 select-none bg-slate-200 w-[60rem] mx-auto text-justify p-2 overflow-y-auto h-[20rem] '>
            {selectFile}
             </div>
-           
-            <button className='w-[22rem] mx-auto mt-[2rem] bg-black text-2xl text-white px-6 py-4 rounded-full  hover:bg-blue-700 ' onClick={download}>Download</button>
+          
+
+            <button className='bg-indigo-500 text-xl text-white mx-auto my-4 py-2 w-[12rem] rounded-md hover:bg-blue-600 transition duration-400 hover:ease-in-out  ' onClick={download}>Download</button>
+        <button onClick={handleChange} className="absolute -top-4 -right-4"><img className="w-[3rem]" src={closeButton} alt="" /></button>  
         </div>
         
         
         </>)
     }
-  return (
-    <div className="w-fit ml-[12rem] mt-[16rem] text-3xl bg-slate-700 cursor-not-allowed p-4 text-white">Select file to view</div>
-  )
+
 }
 
 export default ViewEachFile

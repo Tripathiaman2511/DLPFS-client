@@ -10,6 +10,7 @@ function Authenticate({children}) {
     const[token,setToken]=useState('')
     const[username,setUsername]=useState('')
     const[name,setName]=useState('')
+    const [loading,setLoading]=useState(true)
     const checkUserToken=()=>{
       const token=Cookies.get('auth-token')
 
@@ -17,13 +18,14 @@ function Authenticate({children}) {
       const name=Cookies.get('name') 
       if(!token || token==='undefined'){
         console.log('Not Logged In')
-      
+        setLoading(false)
         return navigate('/')
       }
       console.log('Logged In')
       setUsername(username)
       setName(name)
       setToken(token)
+      setLoading(false)
     }
     useEffect(()=>{
       checkUserToken()
@@ -31,10 +33,11 @@ function Authenticate({children}) {
 return (
     
    <>
-   <UserContext.Provider value={{token,username,name}}>
-
-   {children}
-   </UserContext.Provider>
+   {loading?(<>Loading...</>):
+   (<UserContext.Provider value={{token,username,name}}>
+    {children}
+    </UserContext.Provider>)}
+   
    </>
    
 

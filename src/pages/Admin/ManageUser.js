@@ -30,8 +30,8 @@ function ManageUser() {
                 <td className='font-semibold'>Upload Access:</td>
                 <td className='flex flex-row justify-between'>
                     {user.upload.access?(<>
-                        <button defaultChecked className=' py-1 px-6  text-white bg-black '>True</button>
-                    <button className=' py-1 px-6 bg-slate-400 text-white' onClick={()=>{
+                        <button defaultChecked className=' py-1 px-6  text-white bg-indigo-500 '>True</button>
+                    <button className=' py-1 px-6 bg-slate-600 text-white' onClick={()=>{
                         setUser({
                             ...user,
                             upload:{
@@ -43,7 +43,7 @@ function ManageUser() {
                        
                     }}>False</button>
                     </>):(<>
-                        <button className=' py-1 px-6 bg-slate-400 text-white' onClick={()=>{
+                        <button className=' py-1 px-6 bg-slate-600 text-white' onClick={()=>{
                         setUser({
                             ...user,
                             upload:{
@@ -53,7 +53,7 @@ function ManageUser() {
                         })                            
                            
                         }}>True</button>
-                    <button defaultChecked className=' py-1 px-6  text-white bg-black'>False</button>
+                    <button defaultChecked className=' py-1 px-6  text-white bg-indigo-500'>False</button>
                     </>)}
                     
                     </td>
@@ -75,8 +75,8 @@ function ManageUser() {
             <tr>
                 <td className='font-semibold'>Read Access:</td>
                 <td className='flex flex-row justify-between'>
-                    {user.review.access?(<><button defaultChecked className=' py-1 px-6  text-white bg-black '>True</button>
-                    <button className=' py-1 px-6 bg-slate-400 text-white' onClick={()=>{
+                    {user.review.access?(<><button defaultChecked className=' py-1 px-6  text-white bg-indigo-500 '>True</button>
+                    <button className=' py-1 px-6 bg-slate-600 text-white' onClick={()=>{
                         setUser({
                             ...user,
                             review:{
@@ -88,7 +88,7 @@ function ManageUser() {
                     }}>False</button>
                     
                     </>):(<>
-                        <button className=' py-1 px-6 bg-slate-400 text-white' onClick={()=>{
+                        <button className=' py-1 px-6 bg-slate-600 text-white' onClick={()=>{
                         setUser({
                             ...user,
                             review:{
@@ -99,7 +99,7 @@ function ManageUser() {
                         })
                         
                         }}>True</button>
-                    <button defaultChecked className=' py-1 px-6  text-white bg-black'>False</button>
+                    <button defaultChecked className=' py-1 px-6  text-white bg-indigo-500'>False</button>
                     </>)} 
                 
                 </td>
@@ -116,8 +116,8 @@ function ManageUser() {
         </tbody>
     </table>
     <div className='flex flex-row justify-end'>
-        <button className='mr-10 py-1 px-6 bg-slate-400 text-white hover:bg-black hover:text-white' onClick={updateUser}>Update</button>
-        <button className='mr-10 py-1 px-6 bg-white text-black border border-solid border-black hover:bg-black hover:text-white' onClick={()=>navigate(-1)}>Go Back</button>
+        <button className='transition duration-400 hover:ease-in-out mr-10 py-1 px-6 bg-slate-600 text-white hover:bg-indigo-700 hover:text-white' onClick={updateUser}>Update</button>
+        <button className=' transition duration-400 hover:ease-in-out mr-10 py-1 px-6 bg-white text-black border border-solid border-black hover:bg-black hover:text-white' onClick={()=>navigate(-1)}>Go Back</button>
     </div>
    </div>
    </>

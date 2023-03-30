@@ -2,18 +2,26 @@ import React, { useContext, Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
 import ViewEachFile from './ViewEachFile'
 import { UserContext } from '../../Auth/Authenticate'
+import oops from '../../assets/oops.svg'
+import loadingImage from '../../assets/Loading.svg'
+import fetchingImage from '../../assets/fetching.svg'
 function ReadFile() {
+  const{username}=useContext(UserContext)
 
   const [data,setData]=useState([])
   const[fetched,setFetched]=useState(true)
-  const [fileName,setFileName]=useState()
+  const [fileName,setFileName]=useState('')
+
   const[textData,setTextData]=useState('')
   const[loading,setLoading]=useState(true)
-  const{username}=useContext(UserContext)
+ const[selected,setSelected]=useState(false)
   const[allowed,setAllowed]=useState(false)
   const[dataLoaded,setDataLoaded]=useState(false)
   useEffect(()=>{
     checkRead(callFile)
+    var date=new Date()
+    console.log(typeof Date.now())
+    console.log(date.toLocaleDateString())
   },[])
   
   const checkRead=async(clbk)=>{
@@ -37,9 +45,10 @@ function ReadFile() {
 
   }
   const preview=(value)=>{
+   console.log(value)
+   setSelected(true)
+    setFileName(value.fileName.split('-')[2])
    
-    setFileName(value.fileName)
-    
     axios.get(`/read/preview/api`,{params:value})
     .then(res=>{
         setTextData(res.data)
@@ -47,40 +56,60 @@ function ReadFile() {
     
     
 }
+const closeButton=()=>{
+  setSelected(false)
+}
 
 return(<>
   {
-    loading?(<div className='w-fit font-bold mx-auto text-7xl mt-[15rem] text-blue-600 '>Loading...</div>):
+    loading?(<img className='mx-auto mt-[15rem] animate-spin' src={loadingImage} alt="" />):
       (allowed?
         (fetched? 
-          (<h1 className='w-fit mt-[17rem] text-3xl mx-auto bg-slate-200 p-2 text-slate-500'>Fetching Data...</h1>):
+          (<h1 className='w-fit  text-3xl mt-[2rem] mx-auto animate-pulse p-2 text-slate-500'><img src={fetchingImage} alt="" /></h1>):
           (data.length!==0?
             (
-        <div className=' m-2 flex flex-row '>
-      <div className='w-1/2 mt-4 mr-[8rem]  h-[85vh] overflow-y-scroll py-4 '>
-        {data.map(value=>{
-          return (
-          <Fragment key={value.fileName}>
-            <div className='w-[30rem] flex flex-row justify-between mx-auto   border border-solid border-black mb-4 p-2'>
-            <h1 >{value.fileName}</h1> 
-            <button className='bg-black text-white py-1 px-6 focus:outline-none  focus:bg-blue-500' onClick={()=>{
-              setTextData('')
-              setDataLoaded(true)
-            preview(value)
-            }}>View</button>
-          
-            </div>
-          </Fragment>
-          )
-          })
-        }        
-      </div>
-      <div className='w-1/2'>
-      <ViewEachFile loading={dataLoaded} selectFile={textData} fileName={fileName}/>
-      </div>
+        
+     <div className='static'>
+      <div className=' table-auto w-[80rem] mx-auto  text-center mt-4 border-collapse b'>
+          <div className='table-header-group  '>
+                  <div className='table-row  bg-slate-900 text-slate-200 '>
+                    <div className='table-cell w-[20rem] py-[0.5rem]'>Name</div>
+                    <div className='table-cell w-[20rem] '>Uploaded By</div>
+                    <div className='table-cell w-[20rem] '>Date</div>
+                    <div className='table-cell w-[20rem] '>Time</div>
+                  </div>
+          </div>
+          <div className='table-row-group'>
+          {data.map(value=>{
+            return (
+            <Fragment key={value.fileName}>
+              <div  className='select-none table-row    bg-slate-200 text-slate-900 '>
+              <h1 onClick={()=>{setTextData('');setDataLoaded(true);preview(value)}} className='table-cell  py-[0.5rem] hover:font-semibold ' >{value.fileName.split('-')[2]}</h1> 
+              <h1 className='table-cell  py-[0.5rem]' >{value.fileName.split('-')[1]===username?'You':value.fileName.split('-')[1]}</h1>
+              <h1 className='table-cell  py-[0.5rem]' >{new Date(parseInt( value.fileName.split('-')[0])).toLocaleDateString()}</h1>
+              <h1 className='table-cell  py-[0.5rem]' >{new Date(parseInt( value.fileName.split('-')[0])).toLocaleTimeString()}</h1>
+              </div>
+            </Fragment>
+            )
+            })
+          }        
+          </div>
+
+        </div>
+        {selected?dataLoaded?(
+          <div className='absolute top-[10rem] left-[14rem] bg-white text-black drop-shadow-2xl rounded-md  border-black '>
+          <ViewEachFile selectFile={textData} fileName={fileName} handleChange={closeButton} />
+          </div>
+        ):(<></>):(<></>)}
+        
+     
+     </div>
+        
+        
+     
       
-            </div>):
-            (<h1 className='w-fit mt-[17rem] text-3xl mx-auto bg-slate-200 p-2 text-slate-500'>OOPS! Nothing to Read</h1>)
+          ):
+            (<><img className='w-[25rem] mx-auto mt-[10rem]' src={oops} alt="" /> </> )
           )
         ):
         (

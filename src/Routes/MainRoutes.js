@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import {Routes,Route} from 'react-router-dom'
 import Home from '../pages/HomePage/Home'
-import SelectLogin from '../pages/Login/SelectLogin'
+
 import AdminLogin from '../pages/Login/AdminLogin'
 import UserLogin from '../pages/Login/UserLogin'
 
@@ -36,10 +36,8 @@ function MainRoutes() {
            <Navbar/>
            <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/login' element={<SelectLogin/>}>
-                <Route path='admin' element={<AdminLogin/>}/>
-                <Route path='user' element={<UserLogin/>}/>
-            </Route>
+            <Route path='/login/admin' element={<AdminLogin/>}/>
+            <Route path='/login/user' element={<UserLogin/>}/>
             <Route path='*' element={<NotFoundPage/>}/>
            </Routes>
            </>

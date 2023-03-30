@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
 import User from './User'
-
+import loadingImage from '../../assets/Loading.svg'
 
 
 function Admin() {
@@ -26,7 +26,7 @@ function Admin() {
   return (
    <>
    
-    {loading?(          <div className='w-fit mx-auto text-5xl mt-[15rem] font-semibold'>Loading...</div>):(
+    {loading?(<img className='mx-auto mt-[15rem] animate-spin' src={loadingImage} alt="" />):(
       <>{data && data.length!==0?
         (<>
         <div className='m-2 flex flex-row '>
