@@ -8,7 +8,7 @@ Data leakage prevention (DLP) is a technique used by organizations to prevent th
 
 ## Client Side: About
 Client Side of DLPS basically ha a UI of Admin and Users to interact with the API's at Application Layer.
-To check the how UI looks like [click here](something)
+To check the how UI looks like [click here](https://github.com/Tripathiaman2511/DLPFS-client/tree/main/clientImage)
 
 # How to Work on this project?
 1. Fork this Project - [https://github.com/Tripathiaman2511/DLPFS-client](https://github.com/Tripathiaman2511/DLPFS-client)
