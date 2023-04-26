@@ -18,7 +18,7 @@ To check the how UI looks like [click here](something)
 5. First pull the remote Project and then push.
 
 
-# How to Run the Project
+# How to Run this Project
 > Before running client, run the [server](https://github.com/Tripathiaman2511/DLPFS-server)
 1. Come to client directory
 2. Open terminal and run `npm i` or `npm install`
