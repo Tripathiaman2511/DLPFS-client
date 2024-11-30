@@ -1,6 +1,7 @@
+# Published Paper
+[Case Study on Data Leakage Prevention File System (DLPFS)](https://irjet.net/archives/V11/i11/IRJET-V11I1175.pdf)
+
 # DLPFS - Client Side
-
-
 > To check DLFPS- Server Side [click here](https://github.com/Tripathiaman2511/DLPFS-server) 
 
 # About the Project
